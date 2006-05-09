@@ -1,0 +1,11 @@
+Revision history for Perl extension Safe::Caller.
+
+0.01 Tue May  9 21:31:10 CEST 2006
+ 
+ - called_from.t - which checks whether the closures 
+   and called_from_(?:pkg|file|line|sub) subs work as 
+   expected - has been included in the test-suite.
+   
+ - Added suitable documentation.
+ 
+ - Initial version.
