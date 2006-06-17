@@ -1,5 +1,10 @@
 Revision history for Perl extension Safe::Caller.
 
+0.02 Sat Jun 17 20:46:09 CEST 2006
+
+ - Fixed both $self->{line}->() and called_from_line()
+   in called_from.t from previous erroneous values.
+
 0.01 Tue May  9 21:31:10 CEST 2006
  
  - called_from.t - which checks whether the closures 

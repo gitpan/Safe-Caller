@@ -7,14 +7,18 @@ use Test::More tests => 8;
 use Safe::Caller;
 
 my $safe = Safe::Caller->new;
+
 my $self = Foo->new($safe);
 my @retval = $self->foo;
+
 is($retval[0], 'main', '$self->{pkg}->()');
 is($retval[1], 't/called_from.t', '$self->{file}->()');
 is($retval[2], '12', '$self->{line}->()');
 is($retval[3], 'Foo::foo', '$self->{sub}->()');
+
 $self = Bar->new($safe);
 @retval = $self->foo;
+
 is($retval[0], 1, 'called_from_pkg()');
 is($retval[1], 1, 'called_from_file()');
 is($retval[2], 1, 'called_from_line()');
@@ -30,7 +34,7 @@ sub new {
 
 sub foo { 
     my ($self) = @_;
-    $self->bar; 
+    return $self->bar; 
 }
 
 sub bar {
@@ -48,11 +52,11 @@ sub new {
 
 sub foo {
     my ($self) = @_;
-    $self->bar;
+    return $self->bar;
 }
 
 sub bar {
     my ($self) = @_;
     return ($self->{safe}->called_from_pkg('Bar'), $self->{safe}->called_from_file('t/called_from.t'), 
-            $self->{safe}->called_from_line(52),   $self->{safe}->called_from_sub('Bar::bar'));
+            $self->{safe}->called_from_line(55),   $self->{safe}->called_from_sub('Bar::bar'));
 }

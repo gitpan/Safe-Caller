@@ -1,6 +1,6 @@
 ---
 name: Safe-Caller
-version: 0.01
+version: 0.02
 author:
   - 'Steven Schubiger <schubiger@cpan.org>'
 abstract: A nicer interface to caller() with code execution restriction
@@ -15,7 +15,7 @@ recommends:
 provides:
   Safe::Caller:
     file: lib/Safe/Caller.pm
-    version: 0.01
+    version: 0.02
 generated_by: Module::Build version 0.271
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
