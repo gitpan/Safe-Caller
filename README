@@ -6,59 +6,75 @@ SYNOPSIS
      use Safe::Caller;
 
      $safe = Safe::Caller->new;
-  
+
      package Foo;
- 
+
      foo();
-  
+
      sub foo { bar() }
-  
-     sub bar { 
+
+     sub bar {
          print $safe->{sub}->();
-         if ($safe->called_from_sub('Foo::foo')) { do something }
+         if ($safe->called_from_sub('Foo::foo')) { # do stuff }
      }
 
 DESCRIPTION
 CONSTRUCTOR
   new
      $safe = Safe::Caller->new(2);
- 
-    Supplying how many frames to go back while running "caller()" is
-    optional. By default (if no suitable value is supplied) 2 will be
-    assumed.
+
+    Supplying how many frames to go back while running "caller" in perlfunc
+    is optional. By default (if no suitable value is supplied) 2 will be
+    assumed. The default will be shared among all method calls (accessors &
+    verification routines); the accessors may optionally accept a frame as
+    parameter, whereas verification routines ("called_from_*()") don't.
 
 METHODS
+  Accessors
+     $safe->{pkg}->();
+     $safe->{file}->();
+     $safe->{line}->();
+     $safe->{sub}->();
+     $safe->{hasargs}->();
+     $safe->{wantarray}->();
+     $safe->{evaltext}->();
+     $safe->{is_require}->();
+     $safe->{hints}->();
+     $safe->{bitmask}->();
+
+    See "caller" in perlfunc for the values they are supposed to return.
+
   called_from_pkg
     Checks whether the current sub was called within the appropriate
     package.
 
      $safe->called_from_pkg('main');
- 
+
     Returns 1 on success, 0 on failure.
 
   called_from_file
     Checks whether the current sub was called by the appropriate file.
 
      $safe->called_from_file('foobar.pl');
- 
+
     Returns 1 on success, 0 on failure.
 
   called_from_line
     Checks whether the current sub was called on the appropriate line.
 
      $safe->called_from_line(13);
- 
+
     Returns 1 on success, 0 on failure.
 
   called_from_sub
     Checks whether the current sub was called by the appropriate subroutine.
 
      $safe->called_from_sub('foo');
- 
+
     Returns 1 on success, 0 on failure.
 
 SEE ALSO
-    caller
+    "caller" in perlfunc
 
 AUTHOR
     Steven Schubiger <schubiger@cpan.org>
