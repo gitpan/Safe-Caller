@@ -14,15 +14,15 @@ my $build = Module::Build->new
    requires => {},
    build_requires => {
                        'Carp' => 0,
-   		       'Test::More' => 0,
-		     },	       
+                       'Test::More' => 0,
+                     },
    recommends => {
                    'Test::Pod' => '1.14',
-		   'Test::Pod::Coverage' => '1.04',
-		 },
+                   'Test::Pod::Coverage' => '1.04',
+                 },
    license => 'perl',
    create_readme => 1,
    create_makefile_pl => 'traditional',
   );
-  
+
 $build->create_build_script;
