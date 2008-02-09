@@ -9,6 +9,7 @@ WriteMakefile
           'VERSION_FROM' => 'lib/Safe/Caller.pm',
           'PREREQ_PM' => {
                            'Test::More' => 0,
+                           'File::Spec' => 0,
                            'Carp' => 0
                          }
         )

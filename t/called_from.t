@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+use File::Spec;
 use Safe::Caller;
 use Test::More tests => 14;
 
@@ -13,11 +14,11 @@ use Test::More tests => 14;
     my @retval = $self->baz;
 
     is($retval[0], 'main', '$self->{package}->()');
-    is($retval[1], 't/called_from.t', '$self->{filename}->()');
-    is($retval[2], '13', '$self->{line}->()');
+    is($retval[1], File::Spec->catfile('t', 'called_from.t'), '$self->{filename}->()');
+    is($retval[2], '14', '$self->{line}->()');
     is($retval[3], 'Base::baz', '$self->{subroutine}->()');
     is($retval[4], 'main', '$self->{pkg}->() (deprecated)');
-    is($retval[5], 't/called_from.t', '$self->{file}->() (deprecated)');
+    is($retval[5], File::Spec->catfile('t', 'called_from.t'), '$self->{file}->() (deprecated)');
     is($retval[6], 'Base::baz', '$self->{sub}->() (deprecated)');
 
     $self = Bar->new($caller);
@@ -63,10 +64,10 @@ sub bar
 {
     my $self = shift;
     return ($self->{caller}->called_from_package('Base'),
-            $self->{caller}->called_from_filename('t/called_from.t'),
-            $self->{caller}->called_from_line(45),
+            $self->{caller}->called_from_filename(File::Spec->catfile('t', 'called_from.t')),
+            $self->{caller}->called_from_line(46),
             $self->{caller}->called_from_subroutine('Base::baz'),
             $self->{caller}->called_from_pkg('Base'),
-            $self->{caller}->called_from_file('t/called_from.t'),
+            $self->{caller}->called_from_file(File::Spec->catfile('t', 'called_from.t')),
             $self->{caller}->called_from_sub('Base::baz'));
 }

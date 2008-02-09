@@ -13,6 +13,7 @@ my $build = Module::Build->new
    requires => {},
    build_requires => {
                        'Carp' => 0,
+                       'File::Spec' => 0,
                        'Test::More' => 0,
                      },
    recommends => {
